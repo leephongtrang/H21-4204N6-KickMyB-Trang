@@ -11,6 +11,7 @@ import android.widget.LinearLayout;
 import com.example.kickmyb.databinding.ActivityMainBinding;
 
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 public class AccueilActivity extends AppCompatActivity {
     ListeAdapter adapter;
@@ -30,9 +31,9 @@ public class AccueilActivity extends AppCompatActivity {
 
     private void item200(){
         Tache tache;
-        Date date = new Date(2020,1,26,11,22);
+        Date date = new Date(125, 0,26);
         for (int i = 0; i < 200; i++){
-            tache = new Tache("Item" + i, date, date);
+            tache = new Tache("Item" + i, date);
             adapter.list.add(tache);
         }
         adapter.notifyDataSetChanged();

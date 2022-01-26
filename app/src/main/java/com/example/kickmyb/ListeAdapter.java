@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,13 +54,16 @@ public class ListeAdapter extends RecyclerView.Adapter<ListeAdapter.MyViewHolder
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Tache tache = list.get(position);
 
-        int pourcentage = 100;
+        int pourcentage = 15;
 
         holder.textView.setText(tache.sQueTuDoisFaire);
-        holder.textViewDateD.setText(tache.dateDebut.toString());
-        holder.textViewDateF.setText(tache.dateDebut.toString());
         holder.progressBar.setProgress(pourcentage);
         holder.textViewPourc.setText(pourcentage + "%");
+
+        //Date convertion
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        holder.textViewDateD.setText(format.format(tache.dateDebut));
+        holder.textViewDateF.setText(format.format(tache.dateFinal));
 
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override

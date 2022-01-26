@@ -8,10 +8,10 @@ public class Tache {
     public Date dateDebut;
     public Date dateFinal;
 
-    public Tache(String nom, Date dateD, Date dateF){
+    public Tache(String nom, Date dateF){
         sQueTuDoisFaire = nom;
         progres = 0;
-        dateDebut = dateD;
+        dateDebut = new Date();
         dateFinal = dateF;
     }
 }
