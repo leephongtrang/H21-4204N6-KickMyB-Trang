@@ -6,4 +6,34 @@
     android:layout_height="match_parent"
     tools:context=".CreationActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/editText_nomTache_creation"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:hint="Nom de la tâche"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Pour le :"/>
+
+        <CalendarView
+            android:id="@+id/calendar_dateF_creation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/btn_ajoutTache_creation"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:text="+"/>
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

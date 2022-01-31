@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KickMyB">
-        <activity android:name=".CreationActivity"></activity>
+        <activity android:name=".ConsultActivity"></activity>
+        <activity android:name=".CreationActivity" />
         <activity android:name=".AccueilActivity" />
         <activity android:name=".InscriptionActivity" />
         <activity android:name=".ConnexionActivity">

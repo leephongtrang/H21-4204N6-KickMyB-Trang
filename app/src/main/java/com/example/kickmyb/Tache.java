@@ -1,17 +1,21 @@
 package com.example.kickmyb;
 
+import android.annotation.SuppressLint;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Tache {
     public String sQueTuDoisFaire;
     public int progres;
-    public Date dateDebut;
-    public Date dateFinal;
+    public LocalDateTime dateDebut;
+    public LocalDateTime dateFinal;
 
-    public Tache(String nom, Date dateF){
+    @SuppressLint("NewApi")
+    public Tache(String nom, LocalDateTime dateF){
         sQueTuDoisFaire = nom;
         progres = 0;
-        dateDebut = new Date();
+        dateDebut = LocalDateTime.now();
         dateFinal = dateF;
     }
 }

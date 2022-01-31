@@ -1,5 +1,6 @@
 package com.example.kickmyb;
 
+import android.content.Intent;
 import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,7 +13,9 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.InterruptedIOException;
 import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +53,7 @@ public class ListeAdapter extends RecyclerView.Adapter<ListeAdapter.MyViewHolder
         return vh;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         Tache tache = list.get(position);
@@ -60,15 +64,26 @@ public class ListeAdapter extends RecyclerView.Adapter<ListeAdapter.MyViewHolder
         holder.progressBar.setProgress(pourcentage);
         holder.textViewPourc.setText(pourcentage + "%");
 
-        //Date convertion
+        /*//Date convertion
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         holder.textViewDateD.setText(format.format(tache.dateDebut));
-        holder.textViewDateF.setText(format.format(tache.dateFinal));
+        holder.textViewDateF.setText(format.format(tache.dateFinal));*/
+
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+
+        holder.textViewDateD.setText(tache.dateDebut.format(f));
+        holder.textViewDateF.setText(tache.dateFinal.format(f));
 
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("GNA", "clic sur ");
+                Intent intent = new Intent(v.getContext(), ConsultActivity.class);
+                //À mettre l'ID de l'obj apr pour simplifier
+                intent.putExtra("tQ", tache.sQueTuDoisFaire);
+                intent.putExtra("tDD", tache.dateDebut);
+                intent.putExtra("TDF", tache.dateFinal);
+
+                v.getContext().startActivity(intent);
             }
         });
     }
