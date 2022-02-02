@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.example.kickmyb.databinding.ActivityMainBinding;
+import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.navigation.NavigationView;
 
 import java.time.LocalDateTime;
 import java.time.Month;
@@ -42,6 +44,9 @@ public class AccueilActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        NavigationView navigationView = findViewById(R.id.drawer_layout);
+
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -67,6 +72,4 @@ public class AccueilActivity extends AppCompatActivity {
         adapter = new ListeAdapter();
         recyclerView.setAdapter(adapter);
     }
-
-    
 }

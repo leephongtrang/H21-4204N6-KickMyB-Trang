@@ -20,7 +20,6 @@ import java.util.TimeZone;
 
 public class CreationActivity extends AppCompatActivity {
     LocalDateTime l;
-    ListeAdapter adapter;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -42,21 +41,10 @@ public class CreationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 EditText n = binding.editTextNomTacheCreation;
-                //CalendarView c = findViewById(R.id.calendar_dateF_creation);
-
-                /*Long selectedDate = c.getDate();
-
-                LocalDateTime triggerTime =
-                        LocalDateTime.ofInstant(Instant.ofEpochMilli(c.getDate()),
-                                TimeZone.getDefault().toZoneId());
-                //LocalDateTime d = c.getDate();
-
-                DateTimeFormatter f = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
-                String s = l.format(f);*/
-
-
                 Tache t = new Tache(n.getText().toString(), l);
-                adapter.list.size();
+
+                Intent intent = new Intent(CreationActivity.this, AccueilActivity.class);
+                startActivity(intent);
             }
         });
     }

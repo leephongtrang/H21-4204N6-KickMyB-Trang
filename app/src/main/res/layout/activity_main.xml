@@ -29,8 +29,7 @@
             android:layout_height="match_parent"
             android:layout_margin="5dp"/>
 
+
     </LinearLayout>
-
-
-
+    <include layout="@layout/nav_bar"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
