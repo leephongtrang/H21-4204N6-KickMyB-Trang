@@ -1,27 +1,19 @@
 package com.example.kickmyb;
 
-import androidx.annotation.MainThread;
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
+
+import androidx.annotation.RequiresApi;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.kickmyb.databinding.ActivityMainBinding;
-import com.google.android.material.bottomsheet.BottomSheetBehavior;
-import com.google.android.material.navigation.NavigationView;
 
 import java.time.LocalDateTime;
-import java.time.Month;
-import java.util.Date;
-import java.util.GregorianCalendar;
 
-public class AccueilActivity extends AppCompatActivity {
+public class AccueilActivity extends BaseActivity {
     ListeAdapter adapter;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -33,6 +25,7 @@ public class AccueilActivity extends AppCompatActivity {
         setContentView(view);
 
         setTitle("Accueil");
+        currentActivity = "Acceuil";
 
         initRecycler();
         item200();
@@ -44,9 +37,6 @@ public class AccueilActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        NavigationView navigationView = findViewById(R.id.drawer_layout);
-
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

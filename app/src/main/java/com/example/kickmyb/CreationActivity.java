@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.TimeZone;
 
-public class CreationActivity extends AppCompatActivity {
+public class CreationActivity extends BaseActivity {
     LocalDateTime l;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -28,6 +28,7 @@ public class CreationActivity extends AppCompatActivity {
         ActivityCreationBinding binding  = ActivityCreationBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
+        currentActivity = "Tache";
 
         binding.calendarDateFCreation.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override

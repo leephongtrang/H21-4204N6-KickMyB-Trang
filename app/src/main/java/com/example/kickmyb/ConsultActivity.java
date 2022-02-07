@@ -11,7 +11,7 @@ import com.example.kickmyb.databinding.ActivityConsultBinding;
 
 import java.time.LocalDateTime;
 
-public class ConsultActivity extends AppCompatActivity {
+public class ConsultActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
