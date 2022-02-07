@@ -71,8 +71,9 @@ public class ListeAdapter extends RecyclerView.Adapter<ListeAdapter.MyViewHolder
 
         DateTimeFormatter f = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
 
-        holder.textViewDateD.setText(tache.dateDebut.format(f));
-        holder.textViewDateF.setText(tache.dateFinal.format(f));
+        //holder.textViewDateD.setText(tache.dateDebut.format(f));
+        holder.textViewDateD.setText("3/7jours passé");
+        holder.textViewDateF.setText(tache.dateFinal.format(f) + "date limite");
 
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override

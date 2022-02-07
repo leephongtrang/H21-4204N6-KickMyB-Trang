@@ -20,22 +20,21 @@
         android:gravity="center">
 
         <Button
-            android:id="@+id/btn_plus_consult"
+            android:id="@+id/btn_moins_consult"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="--"/>
 
-        <EditText
+        <TextView
             android:id="@+id/editText_pourcentage_consult"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:textAlignment="center"
-            android:gravity="center_horizontal"
-            android:inputType="number"
-            android:hint="Avancement" />
+            android:gravity="center"
+            android:textSize="30dp" />
 
         <Button
-            android:id="@+id/btn_moins_consult"
+            android:id="@+id/btn_plus_consult"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:text="+"/>

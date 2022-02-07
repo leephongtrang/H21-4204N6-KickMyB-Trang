@@ -37,6 +37,11 @@ public class BaseActivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                         break;
+
+                    case (R.id.menu_deconnexion):
+                        intent = new Intent(BaseActivity.this, ConnexionActivity.class);
+                        startActivity(intent);
+                    break;
                 }
                 return false;
             }

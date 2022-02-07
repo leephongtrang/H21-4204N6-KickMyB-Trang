@@ -2,11 +2,18 @@
 <menu xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <group>
+        <item android:title="Nom d'utilisateur : "/>
+        <item android:id="@+id/menuUtilisateur" />
+    </group>
 
-    <item android:title="Acceuil"
-        android:id="@+id/menu_acceuil"/>
-    <item android:title="Ajout de tâche"
-        android:id="@+id/menu_tache"/>
-    <item android:title="Deconnexion"
-        android:id="@+id/menu_deconnexion"/>
+    <group>
+        <item android:title="Acceuil"
+            android:id="@+id/menu_acceuil"/>
+        <item android:title="Ajout de tâche"
+            android:id="@+id/menu_tache"/>
+        <item android:title="Deconnexion"
+            android:id="@+id/menu_deconnexion"/>
+    </group>
+
 </menu>
