@@ -34,7 +34,7 @@ public class ConsultActivity extends BaseActivity {
         avancement.setText(pourcentage + "%");
 
         TextView textView = findViewById(R.id.textView_temps_consult);
-        textView.setText("50 jours du calandrier des bananiers.");
+        textView.setText("50 jours ");
 
         binding.btnMoinsConsult.setOnClickListener(new View.OnClickListener() {
             @Override

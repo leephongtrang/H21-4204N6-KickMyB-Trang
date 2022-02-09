@@ -64,11 +64,6 @@ public class ListeAdapter extends RecyclerView.Adapter<ListeAdapter.MyViewHolder
         holder.progressBar.setProgress(pourcentage);
         holder.textViewPourc.setText(pourcentage + "%");
 
-        /*//Date convertion
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        holder.textViewDateD.setText(format.format(tache.dateDebut));
-        holder.textViewDateF.setText(format.format(tache.dateFinal));*/
-
         DateTimeFormatter f = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
 
         //holder.textViewDateD.setText(tache.dateDebut.format(f));

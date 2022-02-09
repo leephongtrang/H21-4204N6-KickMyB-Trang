@@ -18,7 +18,10 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/menumenu"/>
+        app:menu="@menu/menumenu"
+        app:headerLayout="@layout/header_nav_drawer">
+
+    </com.google.android.material.navigation.NavigationView>
 
 
 
