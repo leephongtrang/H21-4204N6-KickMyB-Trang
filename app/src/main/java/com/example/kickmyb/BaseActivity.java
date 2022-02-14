@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.example.kickmyb.databinding.ActivityBaseBinding;
 import com.google.android.material.navigation.NavigationView;
@@ -24,6 +25,8 @@ public class BaseActivity extends AppCompatActivity {
         binding = ActivityBaseBinding.inflate(getLayoutInflater());
         binding.frameLayout.addView(view);
         super.setContentView(binding.drawerLayout);
+
+        //https://github.com/codepath/android_guides/wiki/Fragment-Navigation-Drawer
 
         pseudo = "ByMkciK";
         setPseudo(pseudo);
@@ -64,10 +67,5 @@ public class BaseActivity extends AppCompatActivity {
         t.setText(n);
     }
 
-    public void setActionBar(){
-        NavigationView navigationView = findViewById(R.id.na)
-        ActionBar actionBar = getActionBar();
-        actionBar.setDisplayHomeAsUpEnabled(true);
 
-    }
 }
