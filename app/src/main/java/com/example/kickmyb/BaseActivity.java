@@ -8,8 +8,10 @@ import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.kickmyb.databinding.ActivityBaseBinding;
 import com.google.android.material.navigation.NavigationView;
@@ -18,6 +20,9 @@ public class BaseActivity extends AppCompatActivity {
     ActivityBaseBinding binding;
     String pseudo;
     String currentActivity; // Évite la double ouverture d'une activité
+    private Toolbar toolbar;
+    private ActionBarDrawerToggle drawerToggle;
+    private DrawerLayout drawerLayout;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -26,7 +31,21 @@ public class BaseActivity extends AppCompatActivity {
         binding.frameLayout.addView(view);
         super.setContentView(binding.drawerLayout);
 
+        //region setupToolBar
         //https://github.com/codepath/android_guides/wiki/Fragment-Navigation-Drawer
+        // Set a Toolbar to replace the ActionBar.
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawerToggle = setupDrawerToggle();
+
+        drawerToggle.setDrawerIndicatorEnabled(true);
+        drawerToggle.syncState();
+
+        drawerLayout.addDrawerListener(drawerToggle);
+        //endregion
 
         pseudo = "ByMkciK";
         setPseudo(pseudo);
@@ -67,5 +86,10 @@ public class BaseActivity extends AppCompatActivity {
         t.setText(n);
     }
 
+    private ActionBarDrawerToggle setupDrawerToggle() {
+        // NOTE: Make sure you pass in a valid toolbar reference.  ActionBarDrawToggle() does not require it
+        // and will not render the hamburger icon without it.
+        return new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open,  R.string.drawer_close);
+    }
 
 }
