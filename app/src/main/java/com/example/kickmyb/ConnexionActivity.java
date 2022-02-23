@@ -10,6 +10,8 @@ import android.widget.TextView;
 
 import com.example.kickmyb.databinding.ActivityConnexionBinding;
 
+import org.kickmyb.transfer.SignupRequest;
+
 public class ConnexionActivity extends AppCompatActivity {
 
     @Override
