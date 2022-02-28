@@ -1,6 +1,7 @@
 package com.example.kickmyb;
 
 import android.content.Context;
+import android.util.Log;
 
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
@@ -10,6 +11,8 @@ import com.example.kickmyb.http.ServiceCookie;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.kickmyb.transfer.SigninRequest;
+import org.kickmyb.transfer.SigninResponse;
 import org.kickmyb.transfer.SignupRequest;
 
 import java.io.IOException;
@@ -37,12 +40,19 @@ public class ExampleInstrumentedTest {
     public void signUpPostTest() throws IOException { //Inscription
         ServiceCookie service = RetrofitCookie.get();
         SignupRequest s = new SignupRequest() {{username = "lee"; password = "123456789";}};
-        Call<String> call = service.signUp(s);
-        Response<String> response = call.execute();
+        Call<SigninResponse> call = service.signUp(s);
+        Response<SigninResponse> response = call.execute();
+        Log.e("popo", response.body().username);
     }
 
     @Test
-    public void signInPostTest(){ //Connexion
-
+    public void signInPostTest() throws IOException { //Connexion
+        ServiceCookie serviceCookie = RetrofitCookie.get();
+        SigninRequest s = new SigninRequest() {{username = "lee"; password = "123456789";}};
+        Call<SigninResponse> call = serviceCookie.singIn(s);
+        Response<SigninResponse> r = call.execute();
+        Log.e("popi", r.body().username);
     }
+
+
 }

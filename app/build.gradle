@@ -10,6 +10,7 @@ android {
         applicationId "com.example.kickmyb"
         minSdkVersion 16
         targetSdkVersion 31
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
 
@@ -33,6 +34,7 @@ android {
 }
 
 dependencies {
+    implementation "androidx.multidex:multidex:2.0.1"
 
     implementation 'com.github.departement-info-cem:KickMyB-Library:6a00011735ba1159758b762fc3d3f5cfcdefba69'
 
@@ -48,4 +50,6 @@ dependencies {
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+
+    implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
 }
