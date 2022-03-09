@@ -57,9 +57,10 @@ public class InscriptionActivity extends AppCompatActivity {
                     try {
                         Call<SigninResponse> c = service.signUp(s);
                         Response<SigninResponse> r = c.execute();
-                        r.body();
+                        String zou = r.body();
+                        Log.i("livraison", zou);
                     } catch (IOException e) {
-                        Log.e("pizza", e.getMessage());
+                        Log.i("pizza", e.getMessage());
                     }
 
                     //Intent intent = new Intent(InscriptionActivity.this, AccueilActivity.class);
