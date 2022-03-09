@@ -22,6 +22,8 @@ public class ConsultActivity extends BaseActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+        currentActivity = "Consult";
+
         Long tDD = getIntent().getLongExtra("tDD", 0);
         Long tDF = getIntent().getLongExtra("tDF", 0);
 
