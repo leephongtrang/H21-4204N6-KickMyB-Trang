@@ -18,7 +18,8 @@ public class RetrofitCookie {
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(client())
                     //.baseUrl("https://kickmyb-server.herokuapp.com/")
-                    .baseUrl("http://10.0.2.2:8080/")
+                    //.baseUrl("http://10.0.2.2:8080/")
+                    .baseUrl("https://dry-plains-88809.herokuapp.com/")
                     .build();
 
             instance = retrofit.create(ServiceCookie.class);
