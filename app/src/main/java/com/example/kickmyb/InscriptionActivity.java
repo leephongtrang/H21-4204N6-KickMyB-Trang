@@ -19,6 +19,7 @@ import org.kickmyb.transfer.SignupRequest;
 import java.io.IOException;
 
 import retrofit2.Call;
+import retrofit2.Callback;
 import retrofit2.Response;
 
 public class InscriptionActivity extends AppCompatActivity {
@@ -28,6 +29,8 @@ public class InscriptionActivity extends AppCompatActivity {
     EditText confPass;
     TextView error;
     ServiceCookie service;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,17 +57,23 @@ public class InscriptionActivity extends AppCompatActivity {
 
                     Log.e("Tincri", s.username + " et " + s.password);
 
-                    try {
-                        Call<SigninResponse> c = service.signUp(s);
-                        Response<SigninResponse> r = c.execute();
-                        String zou = r.body();
-                        Log.i("livraison", zou);
-                    } catch (IOException e) {
-                        Log.i("pizza", e.getMessage());
-                    }
+                    Call<SigninResponse> c = service.signUp(s);
+                    c.enqueue(new Callback<SigninResponse>() {
+                        @Override
+                        public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {
+                            String zou = response.body().username;
+                            Log.i("livraison", zou);
 
-                    //Intent intent = new Intent(InscriptionActivity.this, AccueilActivity.class);
-                    //startActivity(intent);
+                            Singleton.getInstance(response.body().username);
+
+                            Intent intent = new Intent(InscriptionActivity.this, AccueilActivity.class);
+                            startActivity(intent);
+                        }
+                        @Override
+                        public void onFailure(Call<SigninResponse> call, Throwable t) {
+
+                        }
+                    });
                 }
             }
         });

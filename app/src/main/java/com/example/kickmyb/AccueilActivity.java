@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -30,6 +31,8 @@ public class AccueilActivity extends BaseActivity {
 
         initRecycler();
         item200();
+
+        //Toast.makeText(this,Singleton.getInstance("dfsd").username ,Toast.LENGTH_LONG).show();
 
         binding.btnAjoutTacheAccueil.setOnClickListener(new View.OnClickListener() {
             @Override

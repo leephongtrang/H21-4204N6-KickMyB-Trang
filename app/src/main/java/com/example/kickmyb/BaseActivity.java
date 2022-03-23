@@ -47,8 +47,7 @@ public class BaseActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(drawerToggle);
         //endregion
 
-        pseudo = "ByMkciK";
-        setPseudo(pseudo);
+        setPseudo(Singleton.getInstance("username").username);
 
         binding.navigationBar.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override

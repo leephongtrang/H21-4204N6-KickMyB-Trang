@@ -9,7 +9,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 
-public interface ServiceCookie {
+public interface    ServiceCookie {
 
     @GET("exos/cookie/echo")
     Call<String> cookieEcho();
