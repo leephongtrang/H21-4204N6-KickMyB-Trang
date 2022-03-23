@@ -19,4 +19,7 @@ public interface    ServiceCookie {
 
     @POST("api/id/signin") //connection
     Call<SigninResponse> singIn(@Body SigninRequest s);
+
+    @POST("api/id/signout") //déconn
+    Call<String> signout();
 }

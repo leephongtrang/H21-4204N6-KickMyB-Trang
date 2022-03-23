@@ -14,7 +14,13 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.kickmyb.databinding.ActivityBaseBinding;
+import com.example.kickmyb.http.RetrofitCookie;
+import com.example.kickmyb.http.ServiceCookie;
 import com.google.android.material.navigation.NavigationView;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class BaseActivity extends AppCompatActivity {
     ActivityBaseBinding binding;
@@ -23,6 +29,8 @@ public class BaseActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;
     private DrawerLayout drawerLayout;
+
+    ServiceCookie service = RetrofitCookie.get();
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -69,8 +77,19 @@ public class BaseActivity extends AppCompatActivity {
                         break;
 
                     case (R.id.menu_deconnexion):
-                        intent = new Intent(BaseActivity.this, ConnexionActivity.class);
-                        startActivity(intent);
+                        Call<String> c = service.signout();
+                        c.enqueue(new Callback<String>() {
+                            @Override
+                            public void onResponse(Call<String> call, Response<String> response) {
+                                Intent intent = new Intent(BaseActivity.this, ConnexionActivity.class);
+                                startActivity(intent);
+                            }
+
+                            @Override
+                            public void onFailure(Call<String> call, Throwable t) {
+
+                            }
+                        });
                     break;
                 }
                 return false;
