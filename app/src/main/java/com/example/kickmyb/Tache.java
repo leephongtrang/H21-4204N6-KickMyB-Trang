@@ -8,14 +8,14 @@ import java.util.Date;
 public class Tache {
     public String sQueTuDoisFaire;
     public int progres;
-    public LocalDateTime dateDebut;
-    public LocalDateTime dateFinal;
+    public int tempsPerdu;
+    public Date dateFinal;
 
     @SuppressLint("NewApi")
-    public Tache(String nom, LocalDateTime dateF){
-        sQueTuDoisFaire = nom;
-        progres = 0;
-        dateDebut = LocalDateTime.now();
-        dateFinal = dateF;
+    public Tache(String name, int percentageDone, int percentageTimeSpent, Date deadline){
+        sQueTuDoisFaire = name;
+        progres = percentageDone;
+        tempsPerdu = percentageTimeSpent;
+        dateFinal = deadline;
     }
 }
