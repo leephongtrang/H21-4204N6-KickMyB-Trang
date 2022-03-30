@@ -8,12 +8,23 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.kickmyb.databinding.ActivityConsultBinding;
+import com.example.kickmyb.http.RetrofitCookie;
+import com.example.kickmyb.http.ServiceCookie;
 
+import org.kickmyb.transfer.HomeItemResponse;
+import org.kickmyb.transfer.TaskDetailResponse;
+
+import java.security.Provider;
 import java.time.LocalDateTime;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ConsultActivity extends BaseActivity {
     int pourcentage;
     TextView avancement;
+    ServiceCookie service;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,8 +35,25 @@ public class ConsultActivity extends BaseActivity {
 
         currentActivity = "Consult";
 
-        Long tDD = getIntent().getLongExtra("tDD", 0);
-        Long tDF = getIntent().getLongExtra("tDF", 0);
+        service = RetrofitCookie.get();
+
+        Long id = getIntent().getLongExtra("id", 0);
+
+        TaskDetailResponse taskDetailResponse;
+
+        Call<TaskDetailResponse> call = service.detail(id); //requête detail
+        call.enqueue(new Callback<TaskDetailResponse>() {
+            @Override
+            public void onResponse(Call<TaskDetailResponse> call, Response<TaskDetailResponse> response) {
+
+            }
+
+            @Override
+            public void onFailure(Call<TaskDetailResponse> call, Throwable t) {
+
+            }
+        });
+
 
         pourcentage = 15;
 

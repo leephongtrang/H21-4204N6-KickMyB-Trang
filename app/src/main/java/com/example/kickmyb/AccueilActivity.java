@@ -21,9 +21,12 @@ import com.google.gson.reflect.TypeToken;
 import org.kickmyb.transfer.HomeItemResponse;
 
 import java.lang.reflect.Type;
+import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import kotlin.text.UStringsKt;
 import retrofit2.Call;
@@ -46,12 +49,8 @@ public class AccueilActivity extends BaseActivity {
         currentActivity = "Acceuil";
 
         initRecycler();
+        //item2();
         gettask();
-        //item200();
-
-        //Toast.makeText(this,Singleton.getInstance("dfsd").username ,Toast.LENGTH_LONG).show();
-
-
 
         binding.btnAjoutTacheAccueil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,14 +69,10 @@ public class AccueilActivity extends BaseActivity {
             public void onResponse(Call<ArrayList<HomeItemResponse>> call, Response<ArrayList<HomeItemResponse>> response) {
                 Log.e("test" ,response.body().toString());
                 ArrayList<HomeItemResponse> a = response.body();
-
-                adapter.list.clear();
-                /*for (int i = 0; i < a.size(); i++){
-                    Tache tache = new Tache(a.get(i).name, a.get(i).percentageDone, a.get(i).percentageTimeSpent, a.get(i).deadline);
-                    adapter.list.add(tache);
-                }*/
-                adapter.list.addAll(a);
-                adapter.notifyDataSetChanged();
+                if(!a.isEmpty()){
+                    adapter.list.addAll(a);
+                    adapter.notifyDataSetChanged();
+                }
             }
 
             @Override
@@ -87,16 +82,21 @@ public class AccueilActivity extends BaseActivity {
         });
     }
 
-    /*@RequiresApi(api = Build.VERSION_CODES.O)
-    private void item200(){
-        Tache tache;
-        LocalDateTime date = LocalDateTime.of(2023, 12, 25, 14,00);
-        for (int i = 0; i < 200; i++){
-            tache = new Tache("Item" + i, date);
-            adapter.list.add(tache);
+    @RequiresApi(api = Build.VERSION_CODES.O) //ajout 2 tache local
+    private void item2(){
+        HomeItemResponse homeItemResponse;
+        Date d = new Date(Date.from(Instant.now()).getTime() + 954324353);
+        for (int i = 0; i < 2; i++){
+            homeItemResponse = new HomeItemResponse();
+            homeItemResponse.id = 10000L + i;
+            homeItemResponse.deadline = d;
+            homeItemResponse.percentageTimeSpent = 34;
+            homeItemResponse.name = "Clap";
+            homeItemResponse.percentageDone = 0;
+            adapter.list.add(homeItemResponse);
         }
         adapter.notifyDataSetChanged();
-    }*/
+    }
 
     private void initRecycler(){
         RecyclerView recyclerView = findViewById(R.id.recyclerview_lst);

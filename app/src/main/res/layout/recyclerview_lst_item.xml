@@ -46,7 +46,6 @@
             android:id="@+id/textView_lstItemDate"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:inputType="date"
             android:layout_weight="1"/>
 
         <TextView

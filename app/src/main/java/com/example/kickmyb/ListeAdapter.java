@@ -2,7 +2,6 @@ package com.example.kickmyb;
 
 import android.content.Intent;
 import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +12,18 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.joda.time.Days;
+import org.joda.time.Interval;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 import org.kickmyb.transfer.HomeItemResponse;
 
-import java.io.InterruptedIOException;
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
+import java.time.Instant;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class ListeAdapter extends RecyclerView.Adapter<ListeAdapter.MyViewHolder> {
     public List<HomeItemResponse> list;
@@ -68,19 +71,22 @@ public class ListeAdapter extends RecyclerView.Adapter<ListeAdapter.MyViewHolder
         //DateTimeFormatter f = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         DateFormat df = DateFormat.getDateInstance();
 
-        //holder.textViewDateD.setText(tache.dateDebut.format(f));
-        //holder.textViewDateD.setText("3/7jours passé");
+        int pourIn = 100 - tache.percentageTimeSpent;
+
+        int jourQuiReste = (int)( (tache.deadline.getTime() - Date.from(Instant.now()).getTime())
+                / (1000 * 60 * 60 * 24) );
+
+        int jourTotal = jourQuiReste * 100 / pourIn;
+        int jourPasse = jourTotal - jourQuiReste;
+
+        holder.textViewDateD.setText(jourPasse + "/ " + jourTotal + " jour passé");
         holder.textViewDateF.setText(df.format(tache.deadline) + "date limite");
 
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ConsultActivity.class);
-                //À mettre l'ID de l'obj apr pour simplifier
-                //intent.putExtra("tQ", tache.sQueTuDoisFaire);
-                //intent.putExtra("tDD", tache.dateDebut);
-                //intent.putExtra("TDF", tache.dateFinal);
-
+                intent.putExtra("id", tache.id);
                 v.getContext().startActivity(intent);
             }
         });
