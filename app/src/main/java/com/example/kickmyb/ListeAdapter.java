@@ -87,6 +87,7 @@ public class ListeAdapter extends RecyclerView.Adapter<ListeAdapter.MyViewHolder
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ConsultActivity.class);
                 intent.putExtra("id", tache.id);
+                intent.putExtra("jPasse", jourPasse);
                 v.getContext().startActivity(intent);
             }
         });

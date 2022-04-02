@@ -2,7 +2,9 @@ package com.example.kickmyb;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,6 +17,7 @@ import org.kickmyb.transfer.HomeItemResponse;
 import org.kickmyb.transfer.TaskDetailResponse;
 
 import java.security.Provider;
+import java.text.DateFormat;
 import java.time.LocalDateTime;
 
 import retrofit2.Call;
@@ -25,6 +28,7 @@ public class ConsultActivity extends BaseActivity {
     int pourcentage;
     TextView avancement;
     ServiceCookie service;
+    TaskDetailResponse taskDetailResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,38 +37,38 @@ public class ConsultActivity extends BaseActivity {
         View view = binding.getRoot();
         setContentView(view);
 
+        service = RetrofitCookie.get();
         currentActivity = "Consult";
 
-        service = RetrofitCookie.get();
+        //region link TextView avec les id
+        TextView textNom = findViewById(R.id.textView_nomTache);
+        TextView echeance = findViewById(R.id.textView_dateEchance_consult);
+        TextView jPasse =findViewById(R.id.textView_temps_consult);
+        avancement = findViewById(R.id.editText_pourcentage_consult);
+        //endregion
 
-        Long id = getIntent().getLongExtra("id", 0);
+        DateFormat df = DateFormat.getDateInstance();
+        int jPasseInt = getIntent().getIntExtra("jPasse", 0);
 
-        TaskDetailResponse taskDetailResponse;
-
+        long id = getIntent().getLongExtra("id", 0);
         Call<TaskDetailResponse> call = service.detail(id); //requête detail
         call.enqueue(new Callback<TaskDetailResponse>() {
             @Override
             public void onResponse(Call<TaskDetailResponse> call, Response<TaskDetailResponse> response) {
+                taskDetailResponse = response.body();
+                pourcentage = taskDetailResponse.percentageDone;
 
+                textNom.setText(taskDetailResponse.name);
+                jPasse.setText(jPasseInt + " jours\n");
+                avancement.setText(pourcentage + "%");
+                echeance.setText("Date d'échéance : " + df.format(taskDetailResponse.deadline));
             }
 
             @Override
             public void onFailure(Call<TaskDetailResponse> call, Throwable t) {
-
+                Log.e("test", "fail");
             }
         });
-
-
-        pourcentage = 15;
-
-        TextView textNom = findViewById(R.id.textView_nomTache);
-        textNom.setText(getIntent().getStringExtra("tQ"));
-
-        avancement = findViewById(R.id.editText_pourcentage_consult);
-        avancement.setText(pourcentage + "%");
-
-        TextView textView = findViewById(R.id.textView_temps_consult);
-        textView.setText("50 jours ");
 
         binding.btnMoinsConsult.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +87,33 @@ public class ConsultActivity extends BaseActivity {
                     pourcentage++;
                     avancement.setText(pourcentage + "%");
                 }
+            }
+        });
+
+        binding.btnConfimer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Call<String> call1 = service.updateProgress(id, pourcentage);
+                call1.enqueue(new Callback<String>() {
+                    @Override
+                    public void onResponse(Call<String> call, Response<String> response) {
+                        Intent i = new Intent(ConsultActivity.this, AccueilActivity.class);
+                        startActivity(i);
+                    }
+
+                    @Override
+                    public void onFailure(Call<String> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+
+        binding.btnAnnuler.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(ConsultActivity.this, AccueilActivity.class);
+                startActivity(i);
             }
         });
     }

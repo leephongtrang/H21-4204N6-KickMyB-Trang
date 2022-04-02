@@ -67,7 +67,7 @@ public class AccueilActivity extends BaseActivity {
         call.enqueue(new Callback<ArrayList<HomeItemResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<HomeItemResponse>> call, Response<ArrayList<HomeItemResponse>> response) {
-                Log.e("test" ,response.body().toString());
+                //Log.e("test" ,response.body().toString());
                 ArrayList<HomeItemResponse> a = response.body();
                 if(!a.isEmpty()){
                     adapter.list.addAll(a);

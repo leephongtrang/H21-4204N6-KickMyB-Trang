@@ -64,17 +64,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
         <Button
+            android:id="@+id/btn_confimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Confirmer"
+            android:layout_weight="1"
             />
 
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
         <Button
+            android:id="@+id/btn_annuler"
+            android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Annuler"
             />
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
     </LinearLayout>
 
 

@@ -38,7 +38,7 @@ public interface    ServiceCookie {
     Call<ArrayList<HomeItemResponse>> home();
 
     @GET("api/detail/{id}") //detail
-    Call<TaskDetailResponse> detail(@Part("id") long id);
+    Call<TaskDetailResponse> detail(@Path("id") long id);
 
     @GET("api/progress/{taskID}/{value}") //changer %avancement
     Call<String> updateProgress(@Path("taskID") long id, @Path("value") int pourcentage);
