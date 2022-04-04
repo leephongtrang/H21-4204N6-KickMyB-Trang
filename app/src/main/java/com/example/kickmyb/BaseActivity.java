@@ -24,7 +24,6 @@ import retrofit2.Response;
 
 public class BaseActivity extends AppCompatActivity {
     ActivityBaseBinding binding;
-    String pseudo;
     String currentActivity; // Évite la double ouverture d'une activité
     private Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;

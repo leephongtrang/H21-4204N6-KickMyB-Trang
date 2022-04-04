@@ -43,7 +43,7 @@ public class ConsultActivity extends BaseActivity {
         //region link TextView avec les id
         TextView textNom = findViewById(R.id.textView_nomTache);
         TextView echeance = findViewById(R.id.textView_dateEchance_consult);
-        TextView jPasse =findViewById(R.id.textView_temps_consult);
+        TextView jPasse = findViewById(R.id.textView_temps_consult);
         avancement = findViewById(R.id.editText_pourcentage_consult);
         //endregion
 

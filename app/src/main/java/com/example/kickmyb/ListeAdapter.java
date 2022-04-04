@@ -68,7 +68,6 @@ public class ListeAdapter extends RecyclerView.Adapter<ListeAdapter.MyViewHolder
         holder.progressBar.setProgress(tache.percentageDone);
         holder.textViewPourc.setText(tache.percentageDone + "%");
 
-        //DateTimeFormatter f = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
         DateFormat df = DateFormat.getDateInstance();
 
         int pourIn = 100 - tache.percentageTimeSpent;

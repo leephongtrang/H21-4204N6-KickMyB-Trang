@@ -53,8 +53,6 @@ public class ConnexionActivity extends AppCompatActivity {
                         @Override
                         public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {
                             Intent intent = new Intent(ConnexionActivity.this, AccueilActivity.class);
-                            EditText e = binding.editTextUsernameConnexion;
-
                             Singleton.getInstance(response.body().username);
                             startActivity(intent);
                         }

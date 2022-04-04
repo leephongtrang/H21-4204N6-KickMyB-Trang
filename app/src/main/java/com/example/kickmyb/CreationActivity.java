@@ -66,8 +66,6 @@ public class CreationActivity extends BaseActivity {
                 call.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
-                        //Tache t = new Tache(n.getText().toString(), l);
-
                         Intent intent = new Intent(CreationActivity.this, AccueilActivity.class);
                         startActivity(intent);
                     }
