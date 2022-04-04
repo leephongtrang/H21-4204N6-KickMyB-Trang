@@ -49,7 +49,7 @@ public class AccueilActivity extends BaseActivity {
         currentActivity = "Acceuil";
 
         initRecycler();
-        //item2();
+        item2();
         gettask();
 
         binding.btnAjoutTacheAccueil.setOnClickListener(new View.OnClickListener() {

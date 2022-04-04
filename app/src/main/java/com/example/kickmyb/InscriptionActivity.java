@@ -29,13 +29,12 @@ public class InscriptionActivity extends AppCompatActivity {
     EditText confPass;
     TextView error;
     ServiceCookie service;
-
-
+    ActivityInscriptionBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActivityInscriptionBinding binding = ActivityInscriptionBinding.inflate(getLayoutInflater());
+        binding = ActivityInscriptionBinding.inflate(getLayoutInflater());
         View view = binding.getRoot();
         setContentView(view);
 
@@ -46,7 +45,7 @@ public class InscriptionActivity extends AppCompatActivity {
         username = binding.editTextUsernameInscription;
         password = binding.editTextMdpInscription;
         confPass = binding.editTextMdpConfirmInscription;
-        error = binding.textViewErreur;
+        //error = binding.textViewErreur;
 
         binding.btnInscriptionInscription.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,16 +79,25 @@ public class InscriptionActivity extends AppCompatActivity {
     }
 
     private boolean validatonInfo(String USNA, String MDPD, String MDPC){
-        if (USNA.isEmpty()) { //Si le username est Null
-            error.setText("Le nom d'utilisateur est vide.");
+        if(USNA.isEmpty() || MDPD.isEmpty() || MDPC.isEmpty()){
+            if (USNA.isEmpty()){//Si le username est Null
+                binding.textInputLayoutInscriptionUsername.setError("Le nom d'utilisateur est vide.");
+            }else { binding.textInputLayoutInscriptionUsername.setError(null);}
+            if (MDPD.isEmpty()){//Si le mot de passe est Null
+                binding.textInputLayoutInscriptionPassword.setError("Veuillez entrer un mot de passe.");
+            } else { binding.textInputLayoutInscriptionPassword.setError(null);}
+            if (MDPC.isEmpty()){//Si la confirmation de mot de passe est Null
+                binding.textInputLayoutInscriptionPasswordConfirm.setError("Veuillez confirmer votre mot de passe.");
+            } else { binding.textInputLayoutInscriptionPasswordConfirm.setError(null);}
             return false;
         }
-        if (MDPD.isEmpty()) { error.setText("Veuillez entrer un mot de passe."); return false; } //Si le mot de passe est Null
-        if (MDPC.isEmpty()) { error.setText("Veuillez confirmer votre mot de passe."); return false; } //Si la confirmation de mot de passe est Null
+        binding.textInputLayoutInscriptionUsername.setError(null);
+        binding.textInputLayoutInscriptionPassword.setError(null);
+        binding.textInputLayoutInscriptionPasswordConfirm.setError(null);
         if (MDPD.equals(MDPC)){ //Confirme que les 2 mots de passe sont pareil
             return true;
         } else {
-            error.setText("La confirmation du mot de passe à échouer.");
+            binding.textInputLayoutInscriptionPasswordConfirm.setError("Les mots de passe sont différents.");
             return false;
         }
     }

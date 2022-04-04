@@ -2,4 +2,9 @@
     <string name="app_name">KickMyB</string>
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
+    <string name="username">Nom d\'utilisateur</string>
+    <string name="LogIn">Connexion</string>
+    <string name="SignUp">Inscription</string>
+    <string name="password_confirm">Confirmer le mot de passe</string>
+    <string name="password">Mot de passe</string>
 </resources>

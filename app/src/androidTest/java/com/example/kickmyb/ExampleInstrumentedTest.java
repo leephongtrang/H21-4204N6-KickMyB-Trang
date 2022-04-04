@@ -11,6 +11,7 @@ import com.example.kickmyb.http.ServiceCookie;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.kickmyb.transfer.AddTaskRequest;
 import org.kickmyb.transfer.SigninRequest;
 import org.kickmyb.transfer.SigninResponse;
 import org.kickmyb.transfer.SignupRequest;
@@ -53,6 +54,4 @@ public class ExampleInstrumentedTest {
         Response<SigninResponse> r = call.execute();
         Log.e("popi", r.body().username);
     }
-
-
 }
