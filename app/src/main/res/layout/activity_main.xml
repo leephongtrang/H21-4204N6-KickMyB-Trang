@@ -19,7 +19,7 @@
                 android:id="@+id/btn_ajoutTache_accueil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="+ Tâche"/>
+                android:text="@string/plus_task"/>
 
         </LinearLayout>
 

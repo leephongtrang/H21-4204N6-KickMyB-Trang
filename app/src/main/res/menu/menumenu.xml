@@ -3,11 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <group>
-        <item android:title="Acceuil"
+        <item android:title="@string/home"
             android:id="@+id/menu_acceuil"/>
-        <item android:title="Ajout de tâche"
+        <item android:title="@string/add_task"
             android:id="@+id/menu_tache"/>
-        <item android:title="Deconnexion"
+        <item android:title="@string/logout"
             android:id="@+id/menu_deconnexion"/>
     </group>
 

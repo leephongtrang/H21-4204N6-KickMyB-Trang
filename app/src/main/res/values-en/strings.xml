@@ -5,4 +5,11 @@
     <string name="password_confirm">Confirm password</string>
     <string name="LogIn">Log in</string>
     <string name="SignUp">Sign Up</string>
+    <string name="plus_task">+ Task</string>
+    <string name="home">Home</string>
+    <string name="add_task">Add task</string>
+    <string name="logout">Logout</string>
+    <string name="deadline">Deadline</string>
+    <string name="task_name">Task name</string>
+    <string name="for_the">For :</string>
 </resources>

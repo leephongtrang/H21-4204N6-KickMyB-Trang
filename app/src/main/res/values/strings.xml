@@ -7,4 +7,11 @@
     <string name="SignUp">Inscription</string>
     <string name="password_confirm">Confirmer le mot de passe</string>
     <string name="password">Mot de passe</string>
+    <string name="plus_task">+ Tâche</string>
+    <string name="home">Accueil</string>
+    <string name="add_task">Ajout de tâche</string>
+    <string name="logout">Deconnexion</string>
+    <string name="deadline">Date limite</string>
+    <string name="task_name">Nom de la tâche</string>
+    <string name="for_the">Pour le :</string>
 </resources>

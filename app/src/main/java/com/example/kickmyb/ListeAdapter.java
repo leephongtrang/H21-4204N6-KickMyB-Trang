@@ -1,5 +1,6 @@
 package com.example.kickmyb;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -12,10 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
-import org.joda.time.Days;
-import org.joda.time.Interval;
-import org.joda.time.Period;
-import org.joda.time.PeriodType;
 import org.kickmyb.transfer.HomeItemResponse;
 
 import java.text.DateFormat;
@@ -23,7 +20,6 @@ import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 public class ListeAdapter extends RecyclerView.Adapter<ListeAdapter.MyViewHolder> {
     public List<HomeItemResponse> list;
@@ -59,6 +55,7 @@ public class ListeAdapter extends RecyclerView.Adapter<ListeAdapter.MyViewHolder
         return vh;
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
@@ -78,8 +75,9 @@ public class ListeAdapter extends RecyclerView.Adapter<ListeAdapter.MyViewHolder
         int jourTotal = jourQuiReste * 100 / pourIn;
         int jourPasse = jourTotal - jourQuiReste;
 
+        String d = holder.itemView.getContext().getString(R.string.deadline);
         holder.textViewDateD.setText(jourPasse + "/ " + jourTotal + " jour passé");
-        holder.textViewDateF.setText(df.format(tache.deadline) + "date limite");
+        holder.textViewDateF.setText(d + " : " + df.format(tache.deadline));
 
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
