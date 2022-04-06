@@ -1,5 +1,7 @@
 package com.example.kickmyb;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.kickmyb.databinding.ActivityMainBinding;
 import com.example.kickmyb.http.RetrofitCookie;
 import com.example.kickmyb.http.ServiceCookie;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 import org.kickmyb.transfer.HomeItemResponse;
 
@@ -40,6 +43,9 @@ public class AccueilActivity extends BaseActivity {
 
         initRecycler();
         //item2();
+
+        ProgressDialog progressDialog = ProgressDialog.show(AccueilActivity.this, "titre", "charegesdasfcd");
+
         gettask();
 
         binding.btnAjoutTacheAccueil.setOnClickListener(new View.OnClickListener() {
@@ -50,14 +56,13 @@ public class AccueilActivity extends BaseActivity {
             }
         });
     }
-    
+
     private void gettask(){
         service = RetrofitCookie.get();
         Call<ArrayList<HomeItemResponse>> call = service.home();
         call.enqueue(new Callback<ArrayList<HomeItemResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<HomeItemResponse>> call, Response<ArrayList<HomeItemResponse>> response) {
-                //Log.e("test" ,response.body().toString());
                 ArrayList<HomeItemResponse> a = response.body();
                 if(!a.isEmpty()){
                     adapter.list.addAll(a);
