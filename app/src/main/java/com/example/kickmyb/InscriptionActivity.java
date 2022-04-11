@@ -13,6 +13,8 @@ import com.example.kickmyb.databinding.ActivityInscriptionBinding;
 import com.example.kickmyb.http.RetrofitCookie;
 import com.example.kickmyb.http.ServiceCookie;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.kickmyb.transfer.SigninResponse;
 import org.kickmyb.transfer.SignupRequest;
 
@@ -39,7 +41,7 @@ public class InscriptionActivity extends AppCompatActivity {
         setContentView(view);
 
         service = RetrofitCookie.get();
-
+//'); UPDATE MUser SET username ='<script>alert("leephong")</script>' WHERE id = 1; --
         setTitle("Inscription");
 
         username = binding.editTextUsernameInscription;
@@ -60,13 +62,28 @@ public class InscriptionActivity extends AppCompatActivity {
                     c.enqueue(new Callback<SigninResponse>() {
                         @Override
                         public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {
-                            String zou = response.body().username;
-                            Log.i("livraison", zou);
+                            if(response.isSuccessful()){
+                                String zou = response.body().username;
+                                Log.i("livraison", zou);
 
-                            Singleton.getInstance(response.body().username);
+                                Singleton.getInstance(response.body().username);
 
-                            Intent intent = new Intent(InscriptionActivity.this, AccueilActivity.class);
-                            startActivity(intent);
+                                Intent intent = new Intent(InscriptionActivity.this, AccueilActivity.class);
+                                startActivity(intent);
+                            }
+                            else {
+                                String s = response.message().toString();
+                                try {
+                                    if (response.errorBody().string().equals("\"UsernameTooShort\"")){
+                                        binding.textInputLayoutInscriptionUsername.setError(getString(R.string.UsernameTooShort));
+                                    }
+                                    if (response.errorBody().string().equals("PasswordTooShort")){
+                                        binding.textInputLayoutInscriptionPassword.setError("Le mot de passe est trop court, 4 caractères minimum.");
+                                    }
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
                         }
                         @Override
                         public void onFailure(Call<SigninResponse> call, Throwable t) {

@@ -29,6 +29,7 @@ import retrofit2.Response;
 public class AccueilActivity extends BaseActivity {
     ListeAdapter adapter;
     ServiceCookie service;
+    ProgressDialog progressDialog;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -44,7 +45,7 @@ public class AccueilActivity extends BaseActivity {
         initRecycler();
         //item2();
 
-        ProgressDialog progressDialog = ProgressDialog.show(AccueilActivity.this, "titre", "charegesdasfcd");
+        progressDialog = ProgressDialog.show(AccueilActivity.this, "", "Chargement • • •");
 
         gettask();
 
@@ -63,13 +64,15 @@ public class AccueilActivity extends BaseActivity {
         call.enqueue(new Callback<ArrayList<HomeItemResponse>>() {
             @Override
             public void onResponse(Call<ArrayList<HomeItemResponse>> call, Response<ArrayList<HomeItemResponse>> response) {
-                ArrayList<HomeItemResponse> a = response.body();
-                if(!a.isEmpty()){
-                    adapter.list.addAll(a);
-                    adapter.notifyDataSetChanged();
+                if(response.isSuccessful()){
+                    ArrayList<HomeItemResponse> a = response.body();
+                    if(!a.isEmpty()){
+                        adapter.list.addAll(a);
+                        adapter.notifyDataSetChanged();
+                    }
+                    progressDialog.cancel();
                 }
             }
-
             @Override
             public void onFailure(Call<ArrayList<HomeItemResponse>> call, Throwable t) {
 

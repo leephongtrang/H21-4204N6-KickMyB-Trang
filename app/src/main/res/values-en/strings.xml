@@ -12,4 +12,5 @@
     <string name="deadline">Deadline</string>
     <string name="task_name">Task name</string>
     <string name="for_the">For :</string>
+    <string name="UsernameTooShort">Username is too short.</string>
 </resources>

@@ -14,4 +14,5 @@
     <string name="deadline">Date limite</string>
     <string name="task_name">Nom de la tâche</string>
     <string name="for_the">Pour le :</string>
+    <string name="UsernameTooShort">Le nom d\'utilisatueur est trop court.</string>
 </resources>

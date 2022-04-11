@@ -1,0 +1,27 @@
+FAILLE 
+Contrôle accès
+Lecture / Écriture
+
+Peut créer un quizzz pour un autre usager
+
+EXPLOIT
+1. Signup avec qwerty
+
+2. Signup avec pasGentil
+
+3. Envoyer requête pour créer nun quizz
+localhost:8080/api/creer
+{
+    "nom":"t'as faim ?",
+    "nomUtilisateur":"qwerty"
+}
+
+4. Aller voir la liste des quizz de qwerty
+
+Spam, nom inaproprié, phishing links, etc.
+
+CORRECTIF
+--> Ajouter SpringSecurity (ou autre système de gestion d'usager connecté)
+Plutôt que se fier à l'usager pour l'username 
+	UserDetails ud = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	MUtilisateur utilisateur = service.utilisateurParSonNom(ud.getUsername());
