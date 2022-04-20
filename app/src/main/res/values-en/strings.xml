@@ -13,4 +13,9 @@
     <string name="task_name">Task name</string>
     <string name="for_the">For :</string>
     <string name="UsernameTooShort">Username is too short.</string>
+    <string name="PasswordTooShort">The password is too short, 4 characters minimum.</string>
+    <string name="UsernameNull">Username is empty.</string>
+    <string name="PasswordNull">Enter a password.</string>
+    <string name="PasswordConfNull">Confirm your password.</string>
+    <string name="PasswordDifferent">The passwords are different.</string>
 </resources>

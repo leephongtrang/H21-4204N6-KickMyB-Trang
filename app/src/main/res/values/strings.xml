@@ -15,4 +15,9 @@
     <string name="task_name">Nom de la tâche</string>
     <string name="for_the">Pour le :</string>
     <string name="UsernameTooShort">Le nom d\'utilisatueur est trop court.</string>
+    <string name="PasswordTooShort">Le mot de passe est trop court, 4 caractères minimum.</string>
+    <string name="UsernameNull">Le nom d\'utilisateur est vide.</string>
+    <string name="PasswordNull">Veuillez entrer un mot de passe.</string>
+    <string name="PasswordConfNull">Veuillez confirmer votre mot de passe.</string>
+    <string name="PasswordDifferent">Les mots de passe sont différents.</string>
 </resources>

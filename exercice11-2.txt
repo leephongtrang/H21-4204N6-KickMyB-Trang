@@ -1,0 +1,42 @@
+FAILLE
+Contrôle accès
+Lecture / Écriture
+
+Peut connaître les détails d'une question d'autre usager si on connait l'id du quizz.
+Peut ajouter des questions à un quizz d'un autre usager.
+
+EXPLOIT
+(Lecture)
+1. Signup avec Gentil.
+
+2. Envoyer requête pour créer un quizz.
+	localhost:8080/api/creer
+	{
+    		"nom":"quizzDeGentil"
+	}	
+
+3. Signup avec pasGentil.
+
+4. Envoyer requête pour obtenir des détails.
+	localhost:8080/api/detail/4 <-- id du quizz
+
+(Écriture)
+1. Signup avec Gentil.
+
+2. Envoyer requête pour créer un quizz.
+	localhost:8080/api/creer
+	{
+    		"nom":"quizzDeGentil"
+	}	
+
+3. Signup avec pasGentil.
+
+4. Envoyer requête pour ajouter une question.
+	localhost:8080/api/ajouter
+	{
+    		"question":"hesh",
+   		"quizID":4 <-- id du quizz
+	}
+
+CORRECTIF
+S'assurer que le quizz apartient bien à l'utilisateur qui tente d'ajouter une question.

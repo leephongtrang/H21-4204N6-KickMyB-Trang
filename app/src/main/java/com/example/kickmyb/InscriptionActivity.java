@@ -72,14 +72,15 @@ public class InscriptionActivity extends AppCompatActivity {
                                 startActivity(intent);
                             }
                             else {
-                                String s = response.message().toString();
                                 try {
-                                    if (response.errorBody().string().equals("\"UsernameTooShort\"")){
-                                        binding.textInputLayoutInscriptionUsername.setError(getString(R.string.UsernameTooShort));
+                                    String temp = response.errorBody().string();
+                                    if (temp.equals("\"PasswordTooShort\"")){
+                                    binding.textInputLayoutInscriptionPassword.setError(getString(R.string.PasswordTooShort));
                                     }
-                                    if (response.errorBody().string().equals("PasswordTooShort")){
-                                        binding.textInputLayoutInscriptionPassword.setError("Le mot de passe est trop court, 4 caractères minimum.");
+                                    if (temp.equals("\"UsernameTooShort\"")){
+                                    binding.textInputLayoutInscriptionUsername.setError(getString(R.string.UsernameTooShort));
                                     }
+
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
@@ -98,13 +99,13 @@ public class InscriptionActivity extends AppCompatActivity {
     private boolean validatonInfo(String USNA, String MDPD, String MDPC){
         if(USNA.isEmpty() || MDPD.isEmpty() || MDPC.isEmpty()){
             if (USNA.isEmpty()){//Si le username est Null
-                binding.textInputLayoutInscriptionUsername.setError("Le nom d'utilisateur est vide.");
+                binding.textInputLayoutInscriptionUsername.setError(getString(R.string.UsernameNull));
             }else { binding.textInputLayoutInscriptionUsername.setError(null);}
             if (MDPD.isEmpty()){//Si le mot de passe est Null
-                binding.textInputLayoutInscriptionPassword.setError("Veuillez entrer un mot de passe.");
+                binding.textInputLayoutInscriptionPassword.setError(getString(R.string.PasswordNull));
             } else { binding.textInputLayoutInscriptionPassword.setError(null);}
             if (MDPC.isEmpty()){//Si la confirmation de mot de passe est Null
-                binding.textInputLayoutInscriptionPasswordConfirm.setError("Veuillez confirmer votre mot de passe.");
+                binding.textInputLayoutInscriptionPasswordConfirm.setError(getString(R.string.PasswordConfNull));
             } else { binding.textInputLayoutInscriptionPasswordConfirm.setError(null);}
             return false;
         }
@@ -114,7 +115,7 @@ public class InscriptionActivity extends AppCompatActivity {
         if (MDPD.equals(MDPC)){ //Confirme que les 2 mots de passe sont pareil
             return true;
         } else {
-            binding.textInputLayoutInscriptionPasswordConfirm.setError("Les mots de passe sont différents.");
+            binding.textInputLayoutInscriptionPasswordConfirm.setError(getString(R.string.PasswordDifferent));
             return false;
         }
     }
