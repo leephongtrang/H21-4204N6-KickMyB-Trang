@@ -1,0 +1,3 @@
+Dans main > java > org.kickmyb.server > ConfigSecurity > ligne 89.
+Ça hash le mot de passe avant de l'envoyer dans le néant de l'internet.
+Avec la base de donnée ?

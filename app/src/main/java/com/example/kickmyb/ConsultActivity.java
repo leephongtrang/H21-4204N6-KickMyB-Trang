@@ -2,6 +2,7 @@ package com.example.kickmyb;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,6 +41,8 @@ public class ConsultActivity extends BaseActivity {
         service = RetrofitCookie.get();
         currentActivity = "Consult";
 
+        ProgressDialog progressDialog = ProgressDialog.show(ConsultActivity.this, "", getString(R.string.Loading));
+
         //region link TextView avec les id
         TextView textNom = findViewById(R.id.textView_nomTache);
         TextView echeance = findViewById(R.id.textView_dateEchance_consult);
@@ -62,11 +65,13 @@ public class ConsultActivity extends BaseActivity {
                 jPasse.setText(jPasseInt + " jours\n");
                 avancement.setText(pourcentage + "%");
                 echeance.setText("Date d'échéance : " + df.format(taskDetailResponse.deadline));
+                progressDialog.cancel();
             }
 
             @Override
             public void onFailure(Call<TaskDetailResponse> call, Throwable t) {
                 Log.e("test", "fail");
+                progressDialog.cancel();
             }
         });
 
@@ -93,17 +98,19 @@ public class ConsultActivity extends BaseActivity {
         binding.btnConfimer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                ProgressDialog progressDialog = ProgressDialog.show(ConsultActivity.this, "", getString(R.string.Updating));
                 Call<String> call1 = service.updateProgress(id, pourcentage);
                 call1.enqueue(new Callback<String>() {
                     @Override
                     public void onResponse(Call<String> call, Response<String> response) {
                         Intent i = new Intent(ConsultActivity.this, AccueilActivity.class);
                         startActivity(i);
+                        progressDialog.cancel();
                     }
 
                     @Override
                     public void onFailure(Call<String> call, Throwable t) {
-
+                        progressDialog.cancel();
                     }
                 });
             }

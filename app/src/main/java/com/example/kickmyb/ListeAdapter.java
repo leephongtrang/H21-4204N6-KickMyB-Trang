@@ -1,6 +1,7 @@
 package com.example.kickmyb;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -82,6 +83,7 @@ public class ListeAdapter extends RecyclerView.Adapter<ListeAdapter.MyViewHolder
         holder.ll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                ProgressDialog progressDialog = ProgressDialog.show(v.getContext(), "", v.getContext().getString(R.string.Loading));
                 Intent intent = new Intent(v.getContext(), ConsultActivity.class);
                 intent.putExtra("id", tache.id);
                 intent.putExtra("jPasse", jourPasse);

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -57,25 +58,29 @@ public class CreationActivity extends BaseActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                AddTaskRequest addTaskRequest = new AddTaskRequest();
-                addTaskRequest.deadline = Date.from(l.atZone(ZoneId.systemDefault()).toInstant());
-                addTaskRequest.name = nom.getText().toString();
+                //if (nom.toString().equals("") | nom){
+                    progressDialog = ProgressDialog.show(CreationActivity.this, "", getString(R.string.Creating));
+                    AddTaskRequest addTaskRequest = new AddTaskRequest();
+                    addTaskRequest.deadline = Date.from(l.atZone(ZoneId.systemDefault()).toInstant());
+                    addTaskRequest.name = nom.getText().toString();
 
-                Call<String> call = service.addOne(addTaskRequest);
-                Log.e("test",addTaskRequest.name +" " +addTaskRequest.deadline);
-                call.enqueue(new Callback<String>() {
-                    @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
-                        Intent intent = new Intent(CreationActivity.this, AccueilActivity.class);
-                        startActivity(intent);
-                    }
+                    Call<String> call = service.addOne(addTaskRequest);
+                    Log.e("test",addTaskRequest.name +" " +addTaskRequest.deadline);
+                    call.enqueue(new Callback<String>() {
+                        @Override
+                        public void onResponse(Call<String> call, Response<String> response) {
+                            Intent intent = new Intent(CreationActivity.this, AccueilActivity.class);
+                            startActivity(intent);
+                            progressDialog.cancel();
+                        }
 
-                    @Override
-                    public void onFailure(Call<String> call, Throwable t) {
-
-                    }
-                });
-            }
+                        @Override
+                        public void onFailure(Call<String> call, Throwable t) {
+                            progressDialog.cancel();
+                        }
+                    });
+                }
+            //}
         });
     }
 }

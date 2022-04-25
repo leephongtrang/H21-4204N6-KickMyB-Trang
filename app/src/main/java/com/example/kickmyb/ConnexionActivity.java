@@ -2,6 +2,7 @@ package com.example.kickmyb;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,6 +30,7 @@ public class ConnexionActivity extends AppCompatActivity {
     ServiceCookie service;
     EditText userName;
     EditText passWord;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,9 @@ public class ConnexionActivity extends AppCompatActivity {
         binding.btnConnexionConnexion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressDialog = ProgressDialog.show(ConnexionActivity.this, "", getString(R.string.Connecting));
+                binding.textInputLayoutInscriptionPassword.setError(null);
+                binding.textInputLayoutInscriptionUsername.setError(null);
                 if (!userName.getText().toString().isEmpty() || !passWord.getText().toString().isEmpty()){
                     s.password = passWord.getText().toString();
                     s.username = userName.getText().toString();
@@ -58,23 +63,38 @@ public class ConnexionActivity extends AppCompatActivity {
                         public void onResponse(Call<SigninResponse> call, Response<SigninResponse> response) {
                             if (response.isSuccessful()){
                                 Intent intent = new Intent(ConnexionActivity.this, AccueilActivity.class);
-                                Singleton.getInstance(response.body().username);
+                                Singleton.getInstance("").username = response.body().username;
                                 startActivity(intent);
+                                progressDialog.cancel();
                             }
                             else{
                                 try {
                                     String temp = response.errorBody().string();
                                     Log.e("error", "onResponse: " + temp);
+                                    if (temp.equals("\"InternalAuthenticationServiceException\"")){
+                                        binding.textInputLayoutInscriptionPassword.setError(getString(R.string.SomethingWrong));
+                                        binding.textInputLayoutInscriptionUsername.setError(getString(R.string.SomethingWrong));
+                                    }
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
+                                progressDialog.cancel();
                             }
                         }
                         @Override
                         public void onFailure(Call<SigninResponse> call, Throwable t) {
-
+                            progressDialog.cancel();
                         }
                     });
+                }
+                else{
+                    if (userName.getText().toString().isEmpty()){
+                        binding.textInputLayoutInscriptionUsername.setError(getString(R.string.UsernameNull));
+                    } else { binding.textInputLayoutInscriptionUsername.setError(null);}
+                    if (passWord.getText().toString().isEmpty()){
+                        binding.textInputLayoutInscriptionPassword.setError(getString(R.string.PasswordNull));
+                    } else { binding.textInputLayoutInscriptionPassword.setError(null);}
+                    progressDialog.cancel();
                 }
             }
         });
@@ -87,29 +107,5 @@ public class ConnexionActivity extends AppCompatActivity {
             }
         });
         //endregion
-    }
-
-    private boolean validatonInfo(String USNA, String MDPD, String MDPC){
-        if(USNA.isEmpty() || MDPD.isEmpty() || MDPC.isEmpty()){
-            if (USNA.isEmpty()){//Si le username est Null
-                binding.textInputLayoutInscriptionUsername.setError(getString(R.string.UsernameNull));
-            }else { binding.textInputLayoutInscriptionUsername.setError(null);}
-            if (MDPD.isEmpty()){//Si le mot de passe est Null
-                binding.textInputLayoutInscriptionPassword.setError(getString(R.string.PasswordNull));
-            } else { binding.textInputLayoutInscriptionPassword.setError(null);}
-            if (MDPC.isEmpty()){//Si la confirmation de mot de passe est Null
-                binding.textInputLayoutInscriptionPasswordConfirm.setError(getString(R.string.PasswordConfNull));
-            } else { binding.textInputLayoutInscriptionPasswordConfirm.setError(null);}
-            return false;
-        }
-        binding.textInputLayoutInscriptionUsername.setError(null);
-        binding.textInputLayoutInscriptionPassword.setError(null);
-        binding.textInputLayoutInscriptionPasswordConfirm.setError(null);
-        if (MDPD.equals(MDPC)){ //Confirme que les 2 mots de passe sont pareil
-            return true;
-        } else {
-            binding.textInputLayoutInscriptionPasswordConfirm.setError(getString(R.string.PasswordDifferent));
-            return false;
-        }
     }
 }

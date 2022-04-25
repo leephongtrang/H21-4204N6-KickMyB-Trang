@@ -1,5 +1,6 @@
 package com.example.kickmyb;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,6 +33,7 @@ public class InscriptionActivity extends AppCompatActivity {
     TextView error;
     ServiceCookie service;
     ActivityInscriptionBinding binding;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,10 +54,11 @@ public class InscriptionActivity extends AppCompatActivity {
         binding.btnInscriptionInscription.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (validatonInfo(username.getText().toString(), password.getText().toString(), confPass.getText().toString())){
                     s.username = username.getText().toString();
                     s.password = password.getText().toString();
-
+                    progressDialog = ProgressDialog.show(InscriptionActivity.this, "", getString(R.string.Loading));
                     Log.e("Tincri", s.username + " et " + s.password);
 
                     Call<SigninResponse> c = service.signUp(s);
@@ -70,6 +73,7 @@ public class InscriptionActivity extends AppCompatActivity {
 
                                 Intent intent = new Intent(InscriptionActivity.this, AccueilActivity.class);
                                 startActivity(intent);
+                                progressDialog.cancel();
                             }
                             else {
                                 try {
@@ -80,10 +84,14 @@ public class InscriptionActivity extends AppCompatActivity {
                                     if (temp.equals("\"UsernameTooShort\"")){
                                     binding.textInputLayoutInscriptionUsername.setError(getString(R.string.UsernameTooShort));
                                     }
+                                    if (temp.equals("\"UsernameAlreadyTaken\"")){
+                                        binding.textInputLayoutInscriptionUsername.setError(getString(R.string.UsernameAlreadyTaken));
+                                    }
 
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
+                                progressDialog.cancel();
                             }
                         }
                         @Override

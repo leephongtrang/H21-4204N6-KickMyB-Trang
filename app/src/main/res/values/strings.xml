@@ -20,4 +20,11 @@
     <string name="PasswordNull">Veuillez entrer un mot de passe.</string>
     <string name="PasswordConfNull">Veuillez confirmer votre mot de passe.</string>
     <string name="PasswordDifferent">Les mots de passe sont différents.</string>
+    <string name="UsernameAlreadyTaken">Le nom d\'utilisateur est déjà utilisé.</string>
+    <string name="SomethingWrong">Le nom d\'utilisateur ou le mot de passe est incorrect.</string>
+    <string name="Updating">Mise à jour • • •</string>
+    <string name="Loading">Chargement • • •</string>
+    <string name="Disconnecting">Déconnexion • • •</string>
+    <string name="Connecting">Connexion • • •</string>
+    <string name="Creating">Création • • •</string>
 </resources>

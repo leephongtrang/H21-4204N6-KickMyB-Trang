@@ -1,0 +1,5 @@
+12.1
+Exercice A
+	Le champs "NAME" de la table "MTASK".
+	Non pas vraiment nécessaire d'encripter.
+	Non.

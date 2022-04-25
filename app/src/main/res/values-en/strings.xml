@@ -18,4 +18,11 @@
     <string name="PasswordNull">Enter a password.</string>
     <string name="PasswordConfNull">Confirm your password.</string>
     <string name="PasswordDifferent">The passwords are different.</string>
+    <string name="UsernameAlreadyTaken">The username is already taken.</string>
+    <string name="SomethingWrong">The username or the password is wrong.</string>
+    <string name="Updating">Updating • • •</string>
+    <string name="Loading">Loading • • •</string>
+    <string name="Disconnecting">Disconnecting • • •</string>
+    <string name="Connecting">Connecting • • •</string>
+    <string name="Creating">Creating • • •</string>
 </resources>

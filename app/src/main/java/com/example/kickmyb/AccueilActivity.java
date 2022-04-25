@@ -45,7 +45,7 @@ public class AccueilActivity extends BaseActivity {
         initRecycler();
         //item2();
 
-        progressDialog = ProgressDialog.show(AccueilActivity.this, "", "Chargement • • •");
+        progressDialog = ProgressDialog.show(AccueilActivity.this, "", getString(R.string.Loading));
 
         gettask();
 

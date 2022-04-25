@@ -2,6 +2,7 @@ package com.example.kickmyb;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,7 @@ public class BaseActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private ActionBarDrawerToggle drawerToggle;
     private DrawerLayout drawerLayout;
+    ProgressDialog progressDialog;
 
     ServiceCookie service = RetrofitCookie.get();
 
@@ -76,17 +78,19 @@ public class BaseActivity extends AppCompatActivity {
                         break;
 
                     case (R.id.menu_deconnexion):
+                        progressDialog = ProgressDialog.show(BaseActivity.this, "", getString(R.string.Disconnecting));
                         Call<String> c = service.signout();
                         c.enqueue(new Callback<String>() {
                             @Override
                             public void onResponse(Call<String> call, Response<String> response) {
                                 Intent intent = new Intent(BaseActivity.this, ConnexionActivity.class);
                                 startActivity(intent);
+                                progressDialog.cancel();
                             }
 
                             @Override
                             public void onFailure(Call<String> call, Throwable t) {
-
+                                progressDialog.cancel();
                             }
                         });
                     break;
