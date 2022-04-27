@@ -45,8 +45,6 @@ public class AccueilActivity extends BaseActivity {
         initRecycler();
         //item2();
 
-        progressDialog = ProgressDialog.show(AccueilActivity.this, "", getString(R.string.Loading));
-
         gettask();
 
         binding.btnAjoutTacheAccueil.setOnClickListener(new View.OnClickListener() {
@@ -59,6 +57,7 @@ public class AccueilActivity extends BaseActivity {
     }
 
     private void gettask(){
+        progressDialog = ProgressDialog.show(AccueilActivity.this, "", getString(R.string.Loading));
         service = RetrofitCookie.get();
         Call<ArrayList<HomeItemResponse>> call = service.home();
         call.enqueue(new Callback<ArrayList<HomeItemResponse>>() {
@@ -75,7 +74,7 @@ public class AccueilActivity extends BaseActivity {
             }
             @Override
             public void onFailure(Call<ArrayList<HomeItemResponse>> call, Throwable t) {
-
+                progressDialog.cancel();
             }
         });
     }

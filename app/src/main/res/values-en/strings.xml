@@ -25,4 +25,9 @@
     <string name="Disconnecting">Disconnecting • • •</string>
     <string name="Connecting">Connecting • • •</string>
     <string name="Creating">Creating • • •</string>
+    <string name="DaysPass"> days pass</string>
+    <string name="Days"> days\n</string>
+    <string name="DaysPassL">Time elapsed since task creation : </string>
+    <string name="Confirm">Confirm</string>
+    <string name="Cancel">Cancel</string>
 </resources>

@@ -45,7 +45,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
-        android:text="Temps écoulé depuis la création de la tâche : "/>
+        android:text="@string/DaysPassL"/>
 
     <TextView
         android:id="@+id/textView_temps_consult"
@@ -56,7 +56,7 @@
     <TextView
         android:id="@+id/textView_dateEchance_consult"
         android:text=""
-        android:hint="Date échéance"
+        android:hint="@string/deadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -73,7 +73,7 @@
             android:id="@+id/btn_confimer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Confirmer"
+            android:text="@string/Confirm"
             android:layout_weight="1"
             />
 
@@ -87,7 +87,7 @@
             android:layout_weight="1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Annuler"
+            android:text="@string/Cancel"
             />
 
         <TextView

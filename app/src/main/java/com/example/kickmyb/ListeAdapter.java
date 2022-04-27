@@ -77,7 +77,7 @@ public class ListeAdapter extends RecyclerView.Adapter<ListeAdapter.MyViewHolder
         int jourPasse = jourTotal - jourQuiReste;
 
         String d = holder.itemView.getContext().getString(R.string.deadline);
-        holder.textViewDateD.setText(jourPasse + "/ " + jourTotal + " jour passé");
+        holder.textViewDateD.setText(jourPasse + "/ " + jourTotal + " " + holder.itemView.getContext().getString(R.string.DaysPass));
         holder.textViewDateF.setText(d + " : " + df.format(tache.deadline));
 
         holder.ll.setOnClickListener(new View.OnClickListener() {

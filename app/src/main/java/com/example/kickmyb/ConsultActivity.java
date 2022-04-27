@@ -2,6 +2,7 @@ package com.example.kickmyb;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -62,9 +63,9 @@ public class ConsultActivity extends BaseActivity {
                 pourcentage = taskDetailResponse.percentageDone;
 
                 textNom.setText(taskDetailResponse.name);
-                jPasse.setText(jPasseInt + " jours\n");
+                jPasse.setText(jPasseInt + getString(R.string.Days));
                 avancement.setText(pourcentage + "%");
-                echeance.setText("Date d'échéance : " + df.format(taskDetailResponse.deadline));
+                echeance.setText(getString(R.string.deadline) + " : " + df.format(taskDetailResponse.deadline));
                 progressDialog.cancel();
             }
 
