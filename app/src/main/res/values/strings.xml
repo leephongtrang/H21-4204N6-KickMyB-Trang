@@ -32,4 +32,8 @@
     <string name="DaysPassL">Temps écoulé depuis la création de la tâche :</string>
     <string name="Confirm">Confirmer</string>
     <string name="Cancel">Annuler</string>
+    <string name="TaskNameEmpty">Le nom de la tâche est vide.</string>
+    <string name="TaskNameTooShort">Le nom de la tâche est trop court.</string>
+    <string name="SelectDate">Sélectionnez une date.</string>
+    <string name="SelectDateFutur">Sélectionnez une date dans le futur.</string>
 </resources>

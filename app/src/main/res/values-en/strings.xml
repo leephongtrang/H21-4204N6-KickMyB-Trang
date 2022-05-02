@@ -30,4 +30,8 @@
     <string name="DaysPassL">Time elapsed since task creation : </string>
     <string name="Confirm">Confirm</string>
     <string name="Cancel">Cancel</string>
+    <string name="TaskNameEmpty">The task name is empty.</string>
+    <string name="TaskNameTooShort">The task name is too short.</string>
+    <string name="SelectDate">Select date</string>
+    <string name="SelectDateFutur">Select date in futur.</string>
 </resources>

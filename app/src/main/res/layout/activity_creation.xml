@@ -12,11 +12,21 @@
         android:orientation="vertical"
         android:gravity="center">
 
-        <EditText
-            android:id="@+id/editText_nomTache_creation"
-            android:layout_width="200dp"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayoutTaskName"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/task_name"/>
+            android:hint="@string/task_name"
+            app:boxBackgroundColor="#00FFFFFF"
+            app:errorEnabled="true"
+            android:layout_marginLeft="75dp"
+            android:layout_marginRight="75dp">
+
+            <EditText
+                android:id="@+id/editText_nomTache_creation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:layout_width="wrap_content"

@@ -19,11 +19,21 @@
             android:layout_weight="1"
             android:gravity="center">
 
-            <EditText
-                android:id="@+id/editText_nomTache_creation"
-                android:layout_width="200dp"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayoutTaskName"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/task_name"/>
+                android:hint="@string/task_name"
+                app:boxBackgroundColor="#00FFFFFF"
+                app:errorEnabled="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp">
+
+                <EditText
+                    android:id="@+id/editText_nomTache_creation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+            </com.google.android.material.textfield.TextInputLayout>
 
             <Button
             android:id="@+id/btn_ajoutTache_creation"
@@ -46,7 +56,7 @@
 
             <CalendarView
             android:id="@+id/calendar_dateF_creation"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
         </LinearLayout>
 

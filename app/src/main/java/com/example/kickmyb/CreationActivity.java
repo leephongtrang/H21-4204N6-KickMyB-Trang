@@ -5,6 +5,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -12,6 +13,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CalendarView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.kickmyb.databinding.ActivityCreationBinding;
 import com.example.kickmyb.http.RetrofitCookie;
@@ -19,6 +21,7 @@ import com.example.kickmyb.http.ServiceCookie;
 
 import org.kickmyb.transfer.AddTaskRequest;
 
+import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -58,7 +61,22 @@ public class CreationActivity extends BaseActivity {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onClick(View v) {
-                //if (nom.toString().equals("") | nom){
+                if (nom.getText().toString().isEmpty()){
+                    binding.textInputLayoutTaskName.setError(getString(R.string.TaskNameEmpty));
+                }
+                else if (nom.getText().toString().trim().length() <= 1){
+                    binding.textInputLayoutTaskName.setError(getString(R.string.TaskNameTooShort));
+                }
+                else { binding.textInputLayoutTaskName.setError(null);}
+                if (l == null){
+                    Toast t = Toast.makeText(getApplicationContext(), R.string.SelectDate, Toast.LENGTH_SHORT);
+                    t.show();
+                }
+                else if (l.isBefore(LocalDateTime.now())){
+                    Toast t = Toast.makeText(getApplicationContext(), R.string.SelectDateFutur, Toast.LENGTH_SHORT);
+                    t.show();
+                }
+                else {
                     progressDialog = ProgressDialog.show(CreationActivity.this, "", getString(R.string.Creating));
                     AddTaskRequest addTaskRequest = new AddTaskRequest();
                     addTaskRequest.deadline = Date.from(l.atZone(ZoneId.systemDefault()).toInstant());
@@ -69,9 +87,18 @@ public class CreationActivity extends BaseActivity {
                     call.enqueue(new Callback<String>() {
                         @Override
                         public void onResponse(Call<String> call, Response<String> response) {
-                            Intent intent = new Intent(CreationActivity.this, AccueilActivity.class);
-                            startActivity(intent);
-                            progressDialog.cancel();
+                            if (response.isSuccessful()){
+                                Intent intent = new Intent(CreationActivity.this, AccueilActivity.class);
+                                startActivity(intent);
+                                progressDialog.cancel();
+                            }
+                            else{
+                                try {
+                                    Log.e("error", response.errorBody().string());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
                         }
 
                         @Override
@@ -80,7 +107,7 @@ public class CreationActivity extends BaseActivity {
                         }
                     });
                 }
-            //}
+            }
         });
     }
 }
