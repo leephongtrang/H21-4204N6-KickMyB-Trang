@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kickmyb.databinding.ActivityConnexionBinding;
 import com.example.kickmyb.http.RetrofitCookie;
@@ -84,6 +85,7 @@ public class ConnexionActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<SigninResponse> call, Throwable t) {
                             progressDialog.cancel();
+                            Toast.makeText(getApplicationContext(), "Connexion indisponible", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

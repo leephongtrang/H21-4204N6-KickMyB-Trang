@@ -104,6 +104,7 @@ public class CreationActivity extends BaseActivity {
                         @Override
                         public void onFailure(Call<String> call, Throwable t) {
                             progressDialog.cancel();
+                            errorConnexion();
                         }
                     });
                 }

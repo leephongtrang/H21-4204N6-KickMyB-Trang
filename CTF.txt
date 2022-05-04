@@ -1,0 +1,29 @@
+EXPLOIT
+Contrôle accès
+Lecture/Écriture
+
+Peut voir et modifier les tâches d'un autre utilisateur si on connait son id.
+
+EXPLOIT
+1. Signup avec un compte
+	http://192.168.177.168:8080/api/id/signup
+	{
+    		"username":"gentil",
+    		"password":"gentil"
+	}
+
+2. Envoyer une requête pour voir les détails d'une tâche avec un id.(lecture)
+	http://192.168.177.168:8080/api/detail/25 <-- id
+	
+3. Pour modifier le pourcentage d'une tâche il faut faire une requête avec l'id de la tâche à modifier.(écriture)
+	http://192.168.177.168:8080/api/progress/25/98
+					    id ──┘   └──pourcentage
+
+2. Renvoyer une requête pour voir les détails d'une tâche avec un id pour voir le changement.
+	http://192.168.177.168:8080/api/detail/25 <-- id
+
+CORRECTIF
+→Ajouter un moyen d'identifier l'utilisateur, pour éviter qu'un autre utilisateur modifie/consulte la tâche d'un autre utilisateur sauf lui-même.
+
+	UserDetails ud = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+	MUtilisateur utilisateur = service.utilisateurParSonNom(ud.getUsername());

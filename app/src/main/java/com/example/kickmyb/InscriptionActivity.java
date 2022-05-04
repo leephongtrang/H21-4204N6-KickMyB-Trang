@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -96,7 +97,8 @@ public class InscriptionActivity extends AppCompatActivity {
                         }
                         @Override
                         public void onFailure(Call<SigninResponse> call, Throwable t) {
-
+                            progressDialog.cancel();
+                            Toast.makeText(getApplicationContext(), "Connexion indisponible", Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

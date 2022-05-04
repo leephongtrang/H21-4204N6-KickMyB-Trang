@@ -73,6 +73,7 @@ public class ConsultActivity extends BaseActivity {
             public void onFailure(Call<TaskDetailResponse> call, Throwable t) {
                 Log.e("test", "fail");
                 progressDialog.cancel();
+                errorConnexion();
             }
         });
 

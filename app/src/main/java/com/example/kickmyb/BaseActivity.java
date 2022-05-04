@@ -2,12 +2,15 @@ package com.example.kickmyb;
 
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
@@ -95,6 +98,7 @@ public class BaseActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(Call<String> call, Throwable t) {
                                 progressDialog.cancel();
+
                             }
                         });
                     break;
@@ -117,18 +121,7 @@ public class BaseActivity extends AppCompatActivity {
         return new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.drawer_open,  R.string.drawer_close);
     }
 
-    public void errorUnknownHostExceptionDialog(){
-        Context context;
-
-        //https://stackoverflow.com/questions/2115758/how-do-i-display-an-alert-dialog-on-android
-
-
-        new MaterialAlertDialogBuilder(context)
-                .setTitle("titre")
-                .setMessage("message")
-                .setNeutralButton("ok") { dialog, which ->
-            // Respond to neutral button press
-        }
-        .show()
+    public void errorConnexion(){
+        Toast.makeText(getApplicationContext(), "Connexion indisponible", Toast.LENGTH_SHORT).show();
     }
 }

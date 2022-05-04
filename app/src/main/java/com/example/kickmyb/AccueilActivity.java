@@ -75,7 +75,7 @@ public class AccueilActivity extends BaseActivity {
             @Override
             public void onFailure(Call<ArrayList<HomeItemResponse>> call, Throwable t) {
                 progressDialog.cancel();
-
+                errorConnexion();
             }
         });
     }
