@@ -85,7 +85,7 @@ public class ConnexionActivity extends AppCompatActivity {
                         @Override
                         public void onFailure(Call<SigninResponse> call, Throwable t) {
                             progressDialog.cancel();
-                            Toast.makeText(getApplicationContext(), "Connexion indisponible", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.NoConnection), Toast.LENGTH_SHORT).show();
                         }
                     });
                 }

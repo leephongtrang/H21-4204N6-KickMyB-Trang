@@ -1,0 +1,22 @@
+1. heroDTO {
+      Long id;
+      String nom;
+      int generation;
+      int niveau;
+   }
+
+2. heroPassePortDTO {
+      Date dateEmbauche;
+      String nom;
+      int generation; ┐
+      int niveau;     ┴─ calculer client
+      int habileteMAX <─ caculé serv
+   }
+
+3. profilDTO { 
+	String nomUtilisateur;
+	String alias; // @blabla
+	byte[] imgProfile;
+	boolean estVerifie;
+   }
+   return List<profilDTO> lesF0llows;

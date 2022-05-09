@@ -34,4 +34,6 @@
     <string name="TaskNameTooShort">The task name is too short.</string>
     <string name="SelectDate">Select date</string>
     <string name="SelectDateFutur">Select date in futur.</string>
+    <string name="NoConnection">Connection unavailable</string>
+    <string name="AuthDisconn">Account disconnected</string>
 </resources>

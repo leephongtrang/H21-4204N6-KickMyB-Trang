@@ -94,10 +94,17 @@ public class CreationActivity extends BaseActivity {
                             }
                             else{
                                 try {
-                                    Log.e("error", response.errorBody().string());
+                                    String temp = response.errorBody().string();
+                                    Log.e("error", temp);
+                                    if (temp.equals("\"Forbidden\"")){
+                                        progressDialog.cancel();
+                                        Log.e("errorCatch", "");
+                                    }
+
                                 } catch (IOException e) {
                                     e.printStackTrace();
                                 }
+                                progressDialog.cancel();
                             }
                         }
 
@@ -107,6 +114,7 @@ public class CreationActivity extends BaseActivity {
                             errorConnexion();
                         }
                     });
+                    progressDialog.cancel();
                 }
             }
         });

@@ -27,8 +27,8 @@
     <string name="Disconnecting">Déconnexion • • •</string>
     <string name="Connecting">Connexion • • •</string>
     <string name="Creating">Création • • •</string>
-    <string name="DaysPass">\" jours passé\"</string>
-    <string name="Days">\" jours\n\"</string>
+    <string name="DaysPass"> jours passé</string>
+    <string name="Days"> jours\n</string>
     <string name="DaysPassL">Temps écoulé depuis la création de la tâche :</string>
     <string name="Confirm">Confirmer</string>
     <string name="Cancel">Annuler</string>
@@ -36,4 +36,6 @@
     <string name="TaskNameTooShort">Le nom de la tâche est trop court.</string>
     <string name="SelectDate">Sélectionnez une date.</string>
     <string name="SelectDateFutur">Sélectionnez une date dans le futur.</string>
+    <string name="NoConnection">Connexion indisponible</string>
+    <string name="AuthDisconn">Compte déconnecté</string>
 </resources>

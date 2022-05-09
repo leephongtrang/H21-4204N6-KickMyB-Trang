@@ -18,6 +18,7 @@ import com.example.kickmyb.http.ServiceCookie;
 import org.kickmyb.transfer.HomeItemResponse;
 import org.kickmyb.transfer.TaskDetailResponse;
 
+import java.io.IOException;
 import java.security.Provider;
 import java.text.DateFormat;
 import java.time.LocalDateTime;
@@ -55,27 +56,47 @@ public class ConsultActivity extends BaseActivity {
         int jPasseInt = getIntent().getIntExtra("jPasse", 0);
 
         long id = getIntent().getLongExtra("id", 0);
-        Call<TaskDetailResponse> call = service.detail(id); //requête detail
-        call.enqueue(new Callback<TaskDetailResponse>() {
-            @Override
-            public void onResponse(Call<TaskDetailResponse> call, Response<TaskDetailResponse> response) {
-                taskDetailResponse = response.body();
-                pourcentage = taskDetailResponse.percentageDone;
 
-                textNom.setText(taskDetailResponse.name);
-                jPasse.setText(jPasseInt + getString(R.string.Days));
-                avancement.setText(pourcentage + "%");
-                echeance.setText(getString(R.string.deadline) + " : " + df.format(taskDetailResponse.deadline));
-                progressDialog.cancel();
-            }
 
-            @Override
-            public void onFailure(Call<TaskDetailResponse> call, Throwable t) {
-                Log.e("test", "fail");
-                progressDialog.cancel();
-                errorConnexion();
-            }
-        });
+            Call<TaskDetailResponse> call = service.detail(id); //requête detail
+            call.enqueue(new Callback<TaskDetailResponse>() {
+                @SuppressLint("SetTextI18n")
+                @Override
+                public void onResponse(Call<TaskDetailResponse> call, Response<TaskDetailResponse> response) {
+                    if (response.isSuccessful()){
+                        taskDetailResponse = response.body();
+                        pourcentage = taskDetailResponse.percentageDone;
+
+                        textNom.setText(taskDetailResponse.name);
+                        jPasse.setText(jPasseInt + getString(R.string.Days));
+                        avancement.setText(pourcentage + "%");
+                        echeance.setText(getString(R.string.deadline) + " : " + df.format(taskDetailResponse.deadline));
+                        progressDialog.cancel();
+                    }else {
+                        try {
+                            String temp = response.errorBody().string();
+                            //Log.e("error", temp );
+                            String[] tab = temp.split(",\n");
+                            Log.e("debug", tab[2]);
+
+                            if (temp.equals("\"InternalAuthenticationServiceException\"") || tab[2].equals("   \"error\": \"Forbidden\"")){
+                                errorAuth();
+                            }
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                        progressDialog.cancel();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<TaskDetailResponse> call, Throwable t) {
+                    Log.e("test", "fail");
+                    progressDialog.cancel();
+                    errorConnexion();
+                }
+            });
+
 
         binding.btnMoinsConsult.setOnClickListener(new View.OnClickListener() {
             @Override

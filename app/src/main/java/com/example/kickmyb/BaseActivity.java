@@ -38,6 +38,7 @@ public class BaseActivity extends AppCompatActivity {
     private DrawerLayout drawerLayout;
     ProgressDialog progressDialog;
 
+
     ServiceCookie service = RetrofitCookie.get();
 
     @SuppressLint("RestrictedApi")
@@ -122,6 +123,10 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void errorConnexion(){
-        Toast.makeText(getApplicationContext(), "Connexion indisponible", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.NoConnection), Toast.LENGTH_SHORT).show();
+    }
+
+    public void errorAuth(){
+        Toast.makeText(getApplicationContext(), getString(R.string.AuthDisconn), Toast.LENGTH_SHORT).show();
     }
 }
