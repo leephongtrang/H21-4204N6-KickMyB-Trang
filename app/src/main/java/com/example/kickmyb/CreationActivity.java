@@ -19,6 +19,8 @@ import com.example.kickmyb.databinding.ActivityCreationBinding;
 import com.example.kickmyb.http.RetrofitCookie;
 import com.example.kickmyb.http.ServiceCookie;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.kickmyb.transfer.AddTaskRequest;
 
 import java.io.IOException;
@@ -94,14 +96,17 @@ public class CreationActivity extends BaseActivity {
                             }
                             else{
                                 try {
-                                    String temp = response.errorBody().string();
+                                    String temp = response.errorBody().string();//https://stackoverflow.com/questions/32519618/retrofit-2-0-how-to-get-deserialised-error-response-body
+                                    JSONObject jsonObject = new JSONObject(temp);
+                                    
+
                                     Log.e("error", temp);
-                                    if (temp.equals("\"Forbidden\"")){
+                                    if (temp.equals(jsonObject.getJSONObject("error"))){
                                         progressDialog.cancel();
                                         Log.e("errorCatch", "");
                                     }
 
-                                } catch (IOException e) {
+                                } catch (IOException | JSONException e) {
                                     e.printStackTrace();
                                 }
                                 progressDialog.cancel();
