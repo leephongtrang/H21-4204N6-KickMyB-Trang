@@ -98,15 +98,13 @@ public class CreationActivity extends BaseActivity {
                                 try {
                                     String temp = response.errorBody().string();//https://stackoverflow.com/questions/32519618/retrofit-2-0-how-to-get-deserialised-error-response-body
                                     JSONObject jsonObject = new JSONObject(temp);
-                                    
-
-                                    Log.e("error", temp);
-                                    if (temp.equals(jsonObject.getJSONObject("error"))){
+                                    String temp2 = jsonObject.getString("error");
+                                    if (temp2.equals("Forbidden")){
                                         progressDialog.cancel();
-                                        Log.e("errorCatch", "");
+                                        errorAuth();
                                     }
 
-                                } catch (IOException | JSONException e) {
+                                } catch (Exception e) {
                                     e.printStackTrace();
                                 }
                                 progressDialog.cancel();

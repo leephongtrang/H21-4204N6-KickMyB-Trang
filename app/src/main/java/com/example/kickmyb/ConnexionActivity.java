@@ -72,7 +72,7 @@ public class ConnexionActivity extends AppCompatActivity {
                                 try {
                                     String temp = response.errorBody().string();
                                     Log.e("error", "onResponse: " + temp);
-                                    if (temp.equals("\"InternalAuthenticationServiceException\"")){
+                                    if (temp.equals("\"InternalAuthenticationServiceException\"") || temp.equals("\"BadCredentialsException\"")){
                                         binding.textInputLayoutInscriptionPassword.setError(getString(R.string.SomethingWrong));
                                         binding.textInputLayoutInscriptionUsername.setError(getString(R.string.SomethingWrong));
                                     }

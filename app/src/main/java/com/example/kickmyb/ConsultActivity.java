@@ -3,18 +3,24 @@ package com.example.kickmyb;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.kickmyb.databinding.ActivityConsultBinding;
 import com.example.kickmyb.http.RetrofitCookie;
 import com.example.kickmyb.http.ServiceCookie;
+import com.google.android.material.snackbar.Snackbar;
 
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.kickmyb.transfer.HomeItemResponse;
 import org.kickmyb.transfer.TaskDetailResponse;
 
@@ -32,12 +38,13 @@ public class ConsultActivity extends BaseActivity {
     TextView avancement;
     ServiceCookie service;
     TaskDetailResponse taskDetailResponse;
+    View view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActivityConsultBinding binding = ActivityConsultBinding.inflate(getLayoutInflater());
-        View view = binding.getRoot();
+        view = binding.getRoot();
         setContentView(view);
 
         service = RetrofitCookie.get();
@@ -58,45 +65,42 @@ public class ConsultActivity extends BaseActivity {
         long id = getIntent().getLongExtra("id", 0);
 
 
-            Call<TaskDetailResponse> call = service.detail(id); //requête detail
-            call.enqueue(new Callback<TaskDetailResponse>() {
-                @SuppressLint("SetTextI18n")
-                @Override
-                public void onResponse(Call<TaskDetailResponse> call, Response<TaskDetailResponse> response) {
-                    if (response.isSuccessful()){
-                        taskDetailResponse = response.body();
-                        pourcentage = taskDetailResponse.percentageDone;
-
-                        textNom.setText(taskDetailResponse.name);
-                        jPasse.setText(jPasseInt + getString(R.string.Days));
-                        avancement.setText(pourcentage + "%");
-                        echeance.setText(getString(R.string.deadline) + " : " + df.format(taskDetailResponse.deadline));
-                        progressDialog.cancel();
-                    }else {
-                        try {
-                            String temp = response.errorBody().string();
-                            //Log.e("error", temp );
-                            String[] tab = temp.split(",\n");
-                            Log.e("debug", tab[2]);
-
-                            if (temp.equals("\"InternalAuthenticationServiceException\"") || tab[2].equals("   \"error\": \"Forbidden\"")){
-                                errorAuth();
-                            }
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        progressDialog.cancel();
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<TaskDetailResponse> call, Throwable t) {
-                    Log.e("test", "fail");
+        Call<TaskDetailResponse> call = service.detail(id); //requête detail
+        call.enqueue(new Callback<TaskDetailResponse>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<TaskDetailResponse> call, Response<TaskDetailResponse> response) {
+                if (response.isSuccessful()){
+                    taskDetailResponse = response.body();
+                    pourcentage = taskDetailResponse.percentageDone;
+                    textNom.setText(taskDetailResponse.name);
+                    jPasse.setText(jPasseInt + getString(R.string.Days));
+                    avancement.setText(pourcentage + "%");
+                    echeance.setText(getString(R.string.deadline) + " : " + df.format(taskDetailResponse.deadline));
                     progressDialog.cancel();
-                    errorConnexion();
-                }
-            });
+                }else {
+                    try {
+                        String temp = response.errorBody().string();//https://stackoverflow.com/questions/32519618/retrofit-2-0-how-to-get-deserialised-error-response-body
+                        JSONObject jsonObject = new JSONObject(temp);
+                        String temp2 = jsonObject.getString("error");
 
+                        if (temp.equals("\"InternalAuthenticationServiceException\"") || temp2.equals("Forbidden")){
+                            errorAuth();
+                        }
+                    } catch (IOException | JSONException e) {
+                        e.printStackTrace();
+                    }
+                    progressDialog.cancel();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<TaskDetailResponse> call, Throwable t) {
+                Log.e("test", "fail");
+                progressDialog.cancel();
+                errorConnexion();
+            }
+        });
 
         binding.btnMoinsConsult.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,5 +150,10 @@ public class ConsultActivity extends BaseActivity {
                 startActivity(i);
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Toast.makeText(getApplicationContext(), getString(R.string.consult_conf), Toast.LENGTH_SHORT).show();
     }
 }

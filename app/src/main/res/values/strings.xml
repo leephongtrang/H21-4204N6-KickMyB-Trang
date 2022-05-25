@@ -38,4 +38,5 @@
     <string name="SelectDateFutur">Sélectionnez une date dans le futur.</string>
     <string name="NoConnection">Connexion indisponible</string>
     <string name="AuthDisconn">Compte déconnecté</string>
+    <string name="consult_conf">Veuillez confirmer ou annuler votre changement.</string>
 </resources>

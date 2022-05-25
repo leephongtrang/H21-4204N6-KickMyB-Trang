@@ -56,6 +56,7 @@ public class AccueilActivity extends BaseActivity {
         });
     }
 
+
     private void gettask(){
         progressDialog = ProgressDialog.show(AccueilActivity.this, "", getString(R.string.Loading));
         service = RetrofitCookie.get();
@@ -70,6 +71,9 @@ public class AccueilActivity extends BaseActivity {
                         adapter.notifyDataSetChanged();
                     }
                     progressDialog.cancel();
+                }else{
+                    progressDialog.cancel();
+                    errorAuth();
                 }
             }
             @Override

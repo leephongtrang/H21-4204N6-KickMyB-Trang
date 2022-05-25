@@ -36,4 +36,5 @@
     <string name="SelectDateFutur">Select date in futur.</string>
     <string name="NoConnection">Connection unavailable</string>
     <string name="AuthDisconn">Account disconnected</string>
+    <string name="consult_conf">Please confirm or cancel your change.</string>
 </resources>

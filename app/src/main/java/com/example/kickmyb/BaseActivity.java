@@ -129,4 +129,6 @@ public class BaseActivity extends AppCompatActivity {
     public void errorAuth(){
         Toast.makeText(getApplicationContext(), getString(R.string.AuthDisconn), Toast.LENGTH_SHORT).show();
     }
+
+
 }
